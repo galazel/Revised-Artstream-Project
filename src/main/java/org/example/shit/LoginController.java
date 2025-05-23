@@ -43,6 +43,7 @@ public class LoginController implements DatabaseConnection {
                         Scene scene = new Scene(root);
                         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
                         stage.setScene(scene);
+                        stage.centerOnScreen();
                         stage.setTitle("Welcome!");
                         stage.show();
                     }catch(Exception exception)
@@ -62,6 +63,7 @@ public class LoginController implements DatabaseConnection {
                         Scene scene = new Scene(root);
                         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
                         stage.setScene(scene);
+                        stage.centerOnScreen();
                         stage.setTitle("Welcome!");
                         stage.show();
                     }catch(Exception exception)
@@ -69,6 +71,7 @@ public class LoginController implements DatabaseConnection {
                         throw new RuntimeException();
                     }
                 }
+
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -78,6 +81,7 @@ public class LoginController implements DatabaseConnection {
         }
 
     }
+    @Override
     public boolean checkCredentials(String name, String password)
     {
         String query = "SELECT * FROM users where username = ? AND pass = ? ";

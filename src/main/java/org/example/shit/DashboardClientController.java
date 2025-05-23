@@ -71,4 +71,12 @@ public class DashboardClientController {
             throw new RuntimeException("Failed to load login-view.fxml", exception);
         }
     }
+    @FXML
+    protected void logout(ActionEvent e)
+    {
+        Logout logout = new Logout();
+        logout.logoutButton(e);
+    }
+
+
 }

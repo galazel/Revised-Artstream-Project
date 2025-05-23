@@ -6,14 +6,12 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="802.0" prefWidth="1189.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="802.0" prefWidth="1189.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.shit.DigitalController">
    <children>
       <MenuBar layoutX="11.0" layoutY="12.0" prefHeight="34.0" prefWidth="1189.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
@@ -28,21 +26,17 @@
             <Insets left="10.0" right="10.0" top="10.0" />
          </padding>
       </MenuBar>
-      <GridPane layoutX="88.0" layoutY="162.0" prefHeight="581.0" prefWidth="1014.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
       <TextField layoutX="773.0" layoutY="89.0" prefHeight="25.0" prefWidth="279.0" promptText="Search Artist" />
       <Button layoutX="1059.0" layoutY="89.0" mnemonicParsing="false" text="Search" />
       <Label layoutX="88.0" layoutY="93.0" text="DIgital Artists" />
+      <ScrollPane layoutX="88.0" layoutY="132.0" prefHeight="606.0" prefWidth="1022.0" AnchorPane.topAnchor="132.0">
+         <content>
+            <FlowPane fx:id="flowPane" hgap="30.0" prefHeight="605.0" prefWidth="1019.0" vgap="30.0">
+               <padding>
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+               </padding>
+            </FlowPane>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
