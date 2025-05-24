@@ -1,15 +1,16 @@
 package org.example.shit;
-
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,7 +27,7 @@ public class DigitalController implements DatabaseConnection {
 
     @FXML
     protected void searchArtist(KeyEvent e) {
-        // To be implemented
+
     }
 
     @FXML
@@ -37,21 +38,32 @@ public class DigitalController implements DatabaseConnection {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                // Load image
+
                 ImageView image = new ImageView(new Image("file:D:/Projects in Java/Shit/src/main/resources/Images/profile.jpg"));
                 image.setPreserveRatio(true);
                 image.setFitWidth(100); // Set desired width
-
-                // Name label
                 Label name = new Label(resultSet.getString("fullname"));
                 name.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
-                // Button
                 Button requestButton = new Button("Request Commission");
                 requestButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+                requestButton.setOnAction(event ->
+                {
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("digital-commission-view.fxml"));
+                        Parent root = fxmlLoader.load();
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        stage.setTitle("Request Commission");
+                        Artist.name = name.getText();
+                        stage.showAndWait();
 
-                // VBox setup
-                VBox box = new VBox(10); // spacing between children
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+                VBox box = new VBox(10);
                 box.setAlignment(Pos.CENTER);
                 box.setPrefWidth(200);
                 box.setPrefHeight(250);
@@ -64,11 +76,8 @@ public class DigitalController implements DatabaseConnection {
                     -fx-padding: 15;
                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.5, 0, 4);
                 """);
-
-                // Add components to VBox
                 box.getChildren().addAll(image, name, requestButton);
 
-                // Add VBox to FlowPane
                 flowPane.getChildren().add(box);
             }
 
