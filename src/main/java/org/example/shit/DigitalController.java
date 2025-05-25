@@ -7,28 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class DigitalController implements DatabaseConnection {
-
-    @FXML
-    private FlowPane flowPane;
-
-    @FXML
-    private TextField textField;
-
-    @FXML
-    protected void searchArtist(KeyEvent e) {
-
-    }
+public class DigitalController extends CommonDashboard
+{
 
     @FXML
     public void initialize() {
@@ -86,8 +73,4 @@ public class DigitalController implements DatabaseConnection {
         }
     }
 
-    @Override
-    public boolean checkCredentials(String name, String email) {
-        return false;
-    }
 }
