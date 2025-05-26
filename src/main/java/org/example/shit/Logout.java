@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class Logout {
 
-    public void logoutButton(ActionEvent e)
+    public static void logoutButton(ActionEvent e)
     {
         try {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));

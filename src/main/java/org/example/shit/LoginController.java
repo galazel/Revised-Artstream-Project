@@ -65,6 +65,8 @@ public class LoginController implements DatabaseConnection {
                         stage.setScene(scene);
                         stage.centerOnScreen();
                         stage.setTitle("Welcome!");
+                        Artist.name = name;
+                        Artist.typeOfArtist = checkArtist(name,pass);
                         stage.show();
                     }catch(Exception exception)
                     {

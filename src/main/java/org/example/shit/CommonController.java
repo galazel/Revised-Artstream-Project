@@ -7,10 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.time.LocalDate;
 
 public abstract class CommonController implements DatabaseConnection {
@@ -48,8 +45,36 @@ public abstract class CommonController implements DatabaseConnection {
             alert.setContentText("Please fill in all of the fields!");
             alert.showAndWait();
             return;
-        }else
+        }
+        else
         {
+
+            String query1 = "SELECT * FROM request_commissions WHERE client_name = ?";
+            try(Connection connection = DriverManager.getConnection(CONNECTION_STRING, "root","galagar"))
+            {
+                PreparedStatement preparedStatement = connection.prepareStatement(query1);
+                preparedStatement.setString(1,name);
+                ResultSet compare = preparedStatement.executeQuery();
+                if(compare.next())
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("You already requested this person.");
+                    alert.showAndWait();
+                    clientName.clear();
+                    email.clear();
+                    description.clear();
+                    materialsBox.setValue(null);
+                    date.setValue(null);
+                    Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    stage.close();
+                    return;
+                }
+            }catch (Exception exception)
+            {
+                exception.printStackTrace();
+            }
+
             Date date1 = Date.valueOf(localDate);
             String query = "INSERT INTO request_commissions(req_Artist,client_name,email,description_art,material,completion_date)" +
                     "VALUES(?,?,?,?,?,?)";
