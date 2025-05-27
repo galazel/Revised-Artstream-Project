@@ -11,10 +11,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 
 public class LoginController implements DatabaseConnection {
 
@@ -38,6 +41,18 @@ public class LoginController implements DatabaseConnection {
                         alert.setContentText("Login Successfully!");
                         alert.showAndWait();
 
+                        try(BufferedWriter writer = new BufferedWriter(new FileWriter("D:\\Projects in Java\\Shit\\src\\main\\java\\org\\example\\shit\\LoginHistory")))
+                        {
+                            LocalDateTime date = LocalDateTime.now();
+                            writer.write(name);
+                            writer.newLine();
+                            writer.write(String.valueOf(date));
+                            writer.newLine();
+
+                        }catch (Exception exception)
+                        {
+                            exception.printStackTrace();
+                        }
                         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("client-view.fxml"));
                         Parent root = loader.load();
                         Scene scene = new Scene(root);

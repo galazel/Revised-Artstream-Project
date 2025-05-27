@@ -10,8 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,7 +35,6 @@ public class DashboardArtistController implements DatabaseConnection{
     private FlowPane artworks;
     @FXML
     private AnchorPane anchorPane;
-
 
     @FXML
     public void initialize()
@@ -89,17 +90,117 @@ public class DashboardArtistController implements DatabaseConnection{
 
     }
 
+    protected String setName()
+    {
+        try(Connection connection = DriverManager.getConnection(CONNECTION_STRING,"root","galagar"))
+        {
+            String query = "SELECT * FROM users WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,artistName.getText());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String name = null;
+            if(resultSet.next())
+                return name = resultSet.getString("fullname");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+
     @FXML
     protected void setMenuItemPending(ActionEvent event)
     {
         commissionLabel.setText("Pending Commissions");
         artworks.getChildren().clear();
+
+        try(Connection connection = DriverManager.getConnection(CONNECTION_STRING,"root","galagar"))
+        {
+            String name = setName();
+            if(name != null) {
+                String query1 = "SELECT * FROM request_commissions WHERE req_Artist = ?";
+                PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
+                preparedStatement1.setString(1, name);
+                ResultSet resultSet1 = preparedStatement1.executeQuery();
+
+                while(resultSet1.next())
+                {
+                    Label client_name = new Label (resultSet1.getString("client_name"));
+                    Label client_email = new Label (resultSet1.getString("email"));
+                    Label art_description = new Label (resultSet1.getString("description_art"));
+                    Label artMaterial = new Label (resultSet1.getString("material"));
+                    Label completion_date = new Label (resultSet1.getString("completion_date"));
+                    Button accept = new Button("Accept");
+                    Button delete = new Button("Delete");
+                    VBox box = new VBox();
+                    box.getChildren().addAll(client_name,client_email,art_description,artMaterial,completion_date,accept,delete);
+                    artworks.getChildren().add(box);
+                    accept.setOnAction(e->
+                    {
+                        try(Connection connection1 = DriverManager.getConnection(CONNECTION_STRING,"root","galagar"))
+                        {
+
+                           String query2 = "INSERT INTO accept_commissions(req_Artist,client_name, client_email, art_description, material, completion_date)" +
+                                   "VALUES(?,?,?,?,?,?)";
+                            PreparedStatement preparedStatement2 = connection1.prepareStatement(query2);
+                            preparedStatement2.setString(1, name);
+                            preparedStatement2.setString(2, client_name.getText());
+                            preparedStatement2.setString(3, client_email.getText());
+                            preparedStatement2.setString(4, art_description.getText());
+                            preparedStatement2.setString(5, artMaterial.getText());
+                            preparedStatement2.setString(6, completion_date.getText());
+
+                           preparedStatement2.executeUpdate();
+
+                           String query3 = "DELETE FROM request_commissions WHERE req_Artist = ?";
+                           PreparedStatement preparedStatement3 = connection1.prepareStatement(query3);
+                           preparedStatement3.setString(1, name);
+                           int row1 = preparedStatement3.executeUpdate();
+                           if (row1 > 0)
+                               artworks.getChildren().remove(box);
+
+
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                    delete.setOnAction(e->
+                    {
+                        try(Connection connection1 = DriverManager.getConnection(CONNECTION_STRING,"root","galagar"))
+                        {
+                            String query2 = "DELETE FROM request_commissions WHERE req_Artist = ?";
+                            PreparedStatement preparedStatement3 = connection1.prepareStatement(query2);
+                            preparedStatement3.setString(1, name);
+                            int row = preparedStatement3.executeUpdate();
+                            if(row > 0)
+                                artworks.getChildren().remove(box);
+
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+
+
+                }
+
+            }
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
+
+
+
     @FXML
     protected void setMenuItemAccepted(ActionEvent event)
     {
         commissionLabel.setText("Accepted Commissions");
         artworks.getChildren().clear();
+
+
+
     }@FXML
     protected void setMenuItemDone(ActionEvent event)
     {
