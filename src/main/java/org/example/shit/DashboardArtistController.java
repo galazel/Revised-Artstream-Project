@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class DashboardArtistController implements DatabaseConnection{
 
@@ -39,17 +40,35 @@ public class DashboardArtistController implements DatabaseConnection{
     {
         artistName.setText(Artist.name);
         typeOfArtist.setText(Artist.typeOfArtist);
-        String query = "SELECT * FROM request_commissions WHERE req_Artist = ?";
+
+        int count = 0;
         try(Connection connection = DriverManager.getConnection(CONNECTION_STRING,"root","galagar"))
         {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,artistName.toString());
-            countClients.setText(Integer.toString(preparedStatement.executeUpdate()));
+            String query1 = "SELECT * FROM users WHERE username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query1);
+            preparedStatement.setString(1,artistName.getText());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String name = null;
+            if(resultSet.next())
+             name = resultSet.getString("fullname");
+
+            System.out.println(name);
+
+            if(name != null) {
+                String query2 = "SELECT COUNT(req_Artist) AS total FROM request_commissions WHERE req_Artist = ?";
+                PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
+                preparedStatement2.setString(1, name);
+                ResultSet resultSet1 = preparedStatement2.executeQuery();
+
+                if(resultSet1.next())
+                    count = resultSet1.getInt("total");
+            }
 
         }catch (Exception e)
         {
             e.printStackTrace();
         }
+        countClients.setText(Integer.toString(count));
         if(artworks.getChildren().isEmpty())
             artworks.getChildren().add(new Label("No uploads yet"));
         initializePending();

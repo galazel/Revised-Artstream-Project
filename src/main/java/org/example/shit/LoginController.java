@@ -53,6 +53,8 @@ public class LoginController implements DatabaseConnection {
                 }else
                 {
                     try {
+                        Artist.name = name.toUpperCase();
+                        Artist.typeOfArtist = checkArtist(name,pass);
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setHeaderText(null);
                         alert.setContentText("Login Successfully!");
@@ -65,8 +67,7 @@ public class LoginController implements DatabaseConnection {
                         stage.setScene(scene);
                         stage.centerOnScreen();
                         stage.setTitle("Welcome!");
-                        Artist.name = name;
-                        Artist.typeOfArtist = checkArtist(name,pass);
+
                         stage.show();
                     }catch(Exception exception)
                     {

@@ -20,7 +20,7 @@ public class Logout {
             stage.show();
         }catch(Exception exception)
         {
-            throw new RuntimeException();
+            exception.printStackTrace();
         }
     }
 }
