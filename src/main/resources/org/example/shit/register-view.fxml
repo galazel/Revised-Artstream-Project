@@ -10,21 +10,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.shit.RegisterController">
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="736.0" styleClass="root-pane" stylesheets="@register-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.shit.RegisterController">
+
    <children>
-      <VBox layoutX="192.0" layoutY="52.0" prefHeight="323.0" prefWidth="233.0" spacing="5.0">
+      <!-- Registration form container -->
+      <VBox layoutX="193.0" layoutY="115.0" prefHeight="381.0" prefWidth="351.0" spacing="5.0" styleClass="box-style">
          <children>
-            <Label text="Name" />
-            <TextField fx:id="name" />
-            <Label text="Username" />
-            <TextField fx:id="username" />
-            <Label text="Password" />
-            <PasswordField fx:id="passwordField" />
-            <Label text="Email" />
-            <TextField fx:id="email" promptText="glyzelgalagar@gmail.com" />
-            <Label text="Type of Artist" />
-            <ComboBox fx:id="comboBoxSelect" prefHeight="25.0" prefWidth="134.0" promptText="Select" />
-            <Button mnemonicParsing="false" onAction="#registerButton" prefHeight="33.0" prefWidth="165.0" text="Register">
+            <Label styleClass="label" text="Name" />
+            <TextField fx:id="name" styleClass="text-field" />
+
+            <Label styleClass="label" text="Username" />
+            <TextField fx:id="username" styleClass="text-field" />
+
+            <Label styleClass="label" text="Password" />
+            <PasswordField fx:id="passwordField" styleClass="password-field" />
+
+            <Label styleClass="label" text="Email" />
+            <TextField fx:id="email" promptText="glyzelgalagar@gmail.com" styleClass="text-field" />
+
+            <Label styleClass="label" text="Type of Artist" />
+            <ComboBox fx:id="comboBoxSelect" prefHeight="25.0" prefWidth="134.0" promptText="Select" styleClass="combo-box" />
+
+            <Button mnemonicParsing="false" onAction="#registerButton" prefHeight="33.0" prefWidth="165.0" styleClass="button" text="Register">
                <VBox.margin>
                   <Insets left="23.0" top="10.0" />
                </VBox.margin>
@@ -34,11 +41,12 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </VBox>
-      <Label layoutX="257.0" layoutY="14.0" text="Register">
+
+      <Label layoutX="266.0" layoutY="75.0" styleClass="label" text="Create your ArtStream account">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#gobackButton" text="return" />
+      <Button layoutX="14.0" layoutY="496.0" mnemonicParsing="false" onAction="#gobackButton" styleClass="button" text="Return" />
    </children>
 </Pane>

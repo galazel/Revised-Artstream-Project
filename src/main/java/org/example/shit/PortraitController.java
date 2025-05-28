@@ -27,7 +27,7 @@ public class PortraitController extends CommonDashboard{
 
             while (resultSet.next()) {
 
-                ImageView image = new ImageView(new Image("file:D:/Projects in Java/Shit/src/main/resources/Images/profile.jpg"));
+                ImageView image = new ImageView(new Image("D:\\Projects in Java\\Shit\\src\\main\\resources\\org\\example\\shit\\Images\\profile.jpg"));
                 image.setPreserveRatio(true);
                 image.setFitWidth(100); // Set desired width
                 Label name = new Label(resultSet.getString("fullname"));

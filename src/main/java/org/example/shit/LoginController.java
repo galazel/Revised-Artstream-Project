@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,6 +26,13 @@ public class LoginController implements DatabaseConnection {
     private TextField username;
     @FXML
     private PasswordField password;
+
+
+    public void initialize()
+    {
+
+    }
+
     @FXML
     public void loginButton(ActionEvent e)
     {

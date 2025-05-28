@@ -1,0 +1,47 @@
+.dashboard-root {
+    -fx-background-color: #f0f2f5;
+}
+
+.menu-bar {
+    -fx-background-color: #4267B2;
+    -fx-padding: 0 20 0 20;
+}
+
+.menu-item {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.page-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.card-grid {
+    -fx-padding: 20;
+}
+
+.artist-card {
+    -fx-background-color: white;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.5, 0, 2);
+    -fx-background-radius: 10;
+}
+
+.artist-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(66, 103, 178, 0.5), 10, 0.5, 0, 4);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-cursor: hand;
+}
+
+.card-button {
+    -fx-background-color: #4267B2;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-pref-width: 200;
+    -fx-background-radius: 6;
+}
