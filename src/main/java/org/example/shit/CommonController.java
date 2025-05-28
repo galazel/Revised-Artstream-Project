@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.sql.*;
@@ -109,5 +110,7 @@ public abstract class CommonController implements DatabaseConnection {
     {
         return false;
     }
+
+
 
 }

@@ -53,8 +53,7 @@
                            </font>
                         </Label>
                         <Label layoutX="120.0" layoutY="104.0" text="No. of Clients" />
-                        <Button layoutX="70.0" layoutY="151.0" mnemonicParsing="false" onAction="#setAddArtwork" prefHeight="38.0" prefWidth="175.0" text="Add Artwork" />
-                        <Button layoutX="70.0" layoutY="199.0" mnemonicParsing="false" onAction="#setLogoutBtn" prefHeight="38.0" prefWidth="175.0" text="Logout" />
+                        <Button layoutX="70.0" layoutY="139.0" mnemonicParsing="false" onAction="#setLogoutBtn" prefHeight="38.0" prefWidth="175.0" text="Logout" />
                      </children>
                   </AnchorPane>
                </children>
@@ -83,7 +82,10 @@
             </Label>
             <ScrollPane layoutX="49.0" layoutY="107.0" prefHeight="632.0" prefWidth="747.0">
                <content>
-                  <FlowPane fx:id="artworks" prefHeight="629.0" prefWidth="745.0" />
+                  <FlowPane fx:id="artworks" hgap="10.0" prefHeight="629.0" prefWidth="745.0" vgap="10.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding></FlowPane>
                </content>
             </ScrollPane>
          </children></AnchorPane>

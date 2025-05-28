@@ -74,8 +74,18 @@ public class DashboardClientController {
     @FXML
     protected void logout(ActionEvent e)
     {
-        Logout logout = new Logout();
-        logout.logoutButton(e);
+        try {
+            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) mainAnchor.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Login");
+            stage.show();
+        }catch(Exception exception)
+        {
+            exception.printStackTrace();
+        }
     }
 
 
