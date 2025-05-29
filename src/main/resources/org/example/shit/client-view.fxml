@@ -28,7 +28,7 @@
             </menus>
         </MenuBar>
 
-        <Label layoutX="452.0" layoutY="183.0" styleClass="page-title" text="ARTSTREAM ARTISTS" />
+        <Label layoutX="503.0" layoutY="184.0" styleClass="page-title" text="ARTSTREAM ARTISTS" />
 
         <Pane layoutX="28.0" layoutY="223.0" prefHeight="357.0" prefWidth="1133.0">
             <GridPane hgap="25.0" layoutX="11.0" layoutY="13.0" prefHeight="327.0" prefWidth="952.0" styleClass="card-grid" vgap="25.0">

@@ -92,13 +92,21 @@ public class DashboardArtistController implements DatabaseConnection{
                 while(resultSet1.next())
                 {
                     Label client_name = new Label (resultSet1.getString("client_name"));
+                    client_name.getStyleClass().add("label");
                     Label client_email = new Label (resultSet1.getString("email"));
+                    client_email.getStyleClass().add("label");
                     Label art_description = new Label (resultSet1.getString("description_art"));
+                    art_description.getStyleClass().add("label");
                     Label artMaterial = new Label (resultSet1.getString("material"));
+                    artMaterial.getStyleClass().add("label");
                     Label completion_date = new Label (resultSet1.getString("completion_date"));
+                    completion_date.getStyleClass().add("label");
                     Button accept = new Button("Accept");
+                    accept.getStyleClass().add("button");
                     Button delete = new Button("Delete");
+                    delete.getStyleClass().add("button");
                     VBox box = getVbox();
+                    box.getStyleClass().add("commission-box");
                     box.getChildren().addAll(client_name,client_email,art_description,artMaterial,completion_date,accept,delete);
                     artworks.getChildren().add(box);
                     accept.setOnAction(e->
