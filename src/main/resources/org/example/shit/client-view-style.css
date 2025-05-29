@@ -42,4 +42,5 @@
     -fx-font-size: 18px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
+    -fx-padding: 5;
 }

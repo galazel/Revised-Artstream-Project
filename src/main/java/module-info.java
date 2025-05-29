@@ -1,11 +1,14 @@
 module org.example.shit {
+    requires java.naming;
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.sql;
     requires mysql.connector.j;
     requires java.desktop;
-
-
-    opens org.example.shit to javafx.fxml;
+    requires java.xml.crypto;
+    requires org.hibernate.orm.core;
+    requires jakarta.persistence;
+    opens org.example.shit to javafx.fxml, org.hibernate.orm.core;
     exports org.example.shit;
+
+
 }
