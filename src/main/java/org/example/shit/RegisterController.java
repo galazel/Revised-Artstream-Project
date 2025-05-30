@@ -45,74 +45,80 @@ public class RegisterController implements DatabaseConnection {
     @FXML
     protected void registerButton(ActionEvent e)
     {
-
-        User user = new User.Builder()
-                .setName(name.getText())
-                .setUsername(username.getText())
-                .setPass(passwordField.getText())
-                .setEmail(email.getText())
-                .setArtistType(comboBoxSelect.getValue())
-                .build();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
-
-        session.persist(user);
-
-        tx.commit();
-        session.close();
-
-        System.out.println("User saved successfully!");
-
-//        if(n.isEmpty() || user.isEmpty() || password.isEmpty() || emailText.isEmpty() || type == null)
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Please fill in all of the fields!");
-//            alert.showAndWait();
-//            return;
-//        }else if(checkCredentials(n,emailText))
-//        {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Account already existed");
-//            alert.showAndWait();
-//            return;
-//        }
-//        else
-//        {
-//            String query = "INSERT INTO users(fullname,username,pass,email,type_of_artist) VALUES(?,?,?,?,?)";
-//            try (Connection connect = DriverManager.getConnection(CONNECTION_STRING, "root", "galagar")) {
-//                PreparedStatement statement = connect.prepareStatement(query);
-//                statement.setString(1, n);
-//                statement.setString(2, user);
-//                statement.setString(3, password);
-//                statement.setString(4, emailText);
-//                statement.setString(5, type);
+        String n = name.getText();
+        String user = username.getText();
+        String password = passwordField.getText();
+        String emailText = email.getText();
+        String type = comboBoxSelect.getValue();
 //
-//                int exe = statement.executeUpdate();
-//                if (exe > 0) {
-//                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("Successfully created the account");
-//                    alert.showAndWait();
-//                    try {
-//                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
-//                        Parent root = loader.load();
-//                        Scene scene = new Scene(root);
-//                        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-//                        stage.setScene(scene);
-//                        stage.setTitle("Login");
-//                        stage.show();
-//                    } catch (Exception exception) {
-//                        exception.printStackTrace();
-//                    }
-//                }
 //
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-//        }
+//        User user = new User.Builder()
+//                .setName(name.getText())
+//                .setUsername(username.getText())
+//                .setPass(passwordField.getText())
+//                .setEmail(email.getText())
+//                .setArtistType(comboBoxSelect.getValue())
+//                .build();
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Transaction tx = session.beginTransaction();
 //
+//        session.persist(user);
+//
+//        tx.commit();
+//        session.close();
+//
+//        System.out.println("User saved successfully!");
+
+        if(n.isEmpty() || user.isEmpty() || password.isEmpty() || emailText.isEmpty() || type == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all of the fields!");
+            alert.showAndWait();
+            return;
+        }else if(checkCredentials(n,emailText))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Account already existed");
+            alert.showAndWait();
+            return;
+        }
+        else
+        {
+            String query = "INSERT INTO users(fullname,username,pass,email,type_of_artist) VALUES(?,?,?,?,?)";
+            try (Connection connect = DriverManager.getConnection(CONNECTION_STRING, "root", "galagar")) {
+                PreparedStatement statement = connect.prepareStatement(query);
+                statement.setString(1, n);
+                statement.setString(2, user);
+                statement.setString(3, password);
+                statement.setString(4, emailText);
+                statement.setString(5, type);
+
+                int exe = statement.executeUpdate();
+                if (exe > 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Successfully created the account");
+                    alert.showAndWait();
+                    try {
+                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
+                        Parent root = loader.load();
+                        Scene scene = new Scene(root);
+                        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.setTitle("Login");
+                        stage.show();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+
 
 
 

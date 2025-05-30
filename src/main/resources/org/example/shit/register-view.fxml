@@ -30,10 +30,10 @@
 
             <Label styleClass="label" text="Type of Artist" />
             <ComboBox fx:id="comboBoxSelect" prefHeight="25.0" prefWidth="134.0" promptText="Select" styleClass="combo-box" />
-
-            <Button mnemonicParsing="false" onAction="#registerButton" prefHeight="33.0" prefWidth="165.0" styleClass="button" text="Register">
+      
+                        <Button mnemonicParsing="false" onAction="#registerButton" prefHeight="33.0" prefWidth="165.0" styleClass="button" text="Register">
                <VBox.margin>
-                  <Insets left="23.0" top="10.0" />
+                  <Insets left="80.0" top="10.0" />
                </VBox.margin>
             </Button>
          </children>
